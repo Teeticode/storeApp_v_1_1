@@ -1,0 +1,115 @@
+import { AntDesign, Entypo, Ionicons } from '@expo/vector-icons'
+import { BlurView } from 'expo-blur'
+import React,{useState,useRef} from 'react'
+import { View, Text, StyleSheet,Image,TouchableOpacity, Animated ,TouchableWithoutFeedback} from 'react-native'
+import { FadeIn } from 'react-native-reanimated'
+
+const deliveryadd = require('../assets/icons/deliveryadd.png')
+const favoriteadd = require('../assets/icons/favouriteadd.png')
+const phoneadd = require('../assets/icons/phoneadd.png')
+const storeadd = require('../assets/icons/storeadd.png')
+export default function FloatingButtonApp () {
+    
+    const [isOpen,SetIsOpen]= useState(false)
+    const toggleAnimation = useRef(new Animated.Value(0)).current
+    
+    const StartAnimation = ()=>{
+        const toValue = isOpen ? 0 : 1;
+        Animated.timing(toggleAnimation, {
+            toValue:toValue,
+            useNativeDriver:false,
+            duration:300
+        }).start();
+        SetIsOpen(!isOpen)
+    }
+    return (
+        <View 
+           style={styles.container} 
+        >
+            {
+                isOpen === true ? (
+                    <>
+                    <TouchableWithoutFeedback>
+                        <Animated.View style={[styles.button,styles.secondary]}>
+                            <BlurView>
+                                <TouchableOpacity>
+                                    <Image source={deliveryadd} style={{width:25,height:25}}/>
+                                </TouchableOpacity>
+                            </BlurView>
+                        </Animated.View>
+                    </TouchableWithoutFeedback>
+                    <TouchableWithoutFeedback>
+                        <Animated.View style={[styles.button,styles.secondary]}>
+                            <BlurView>
+                                <TouchableOpacity>
+                                    <Image source={favoriteadd} style={{width:25,height:25}}/>
+                                </TouchableOpacity>
+                            </BlurView>
+                        </Animated.View>
+                    </TouchableWithoutFeedback>
+                    <TouchableWithoutFeedback>
+                        <Animated.View style={[styles.button,styles.secondary]}>
+                            <BlurView>    
+                                <TouchableOpacity>
+                                    <Image source={storeadd} style={{width:25,height:25}}/>
+                                </TouchableOpacity>
+                            </BlurView>
+                        </Animated.View>
+                    </TouchableWithoutFeedback>
+            
+                    </>
+                ):(
+                    <></>
+                )
+            }
+
+            <TouchableWithoutFeedback
+                onPress={()=>{
+                    StartAnimation();
+                }}
+            >
+            <Animated.View style={[{
+                transform:[
+                    {
+                        rotate:toggleAnimation.interpolate({
+                            inputRange:[0,1],
+                            outputRange:["0deg", "45deg"]
+                        })
+                    }
+                ]
+            },styles.button]}>
+               <AntDesign style={{fontWeight:'800'}} name='plus' size={24} color='#fff'/>
+            </Animated.View>
+            
+            </TouchableWithoutFeedback>
+            
+        </View>
+    )
+}
+
+const styles = StyleSheet.create({
+    container:{
+        position:'absolute',
+        alignItems:'center',
+        bottom:10,
+        right:20
+    },
+    button:{
+        backgroundColor:'#036ea8',
+        width:50,
+        height:50,
+        borderRadius:25,
+        alignItems:'center',
+        justifyContent:'center'
+
+    },
+    
+    secondary:{
+        width:48,
+        height:48,
+        borderRadius: 48/2,
+        backgroundColor:'transparent',
+        marginLeft:2,
+        marginBottom:8
+    }
+})

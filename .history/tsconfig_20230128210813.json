@@ -1,0 +1,18 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true
+  },
+  +  plugins: [
+    +    [
+    +       'module-resolver',
+    +       {
+    +         root: ['./src'],
+    +         extensions: ['.ios.js', '.android.js', '.js', '.ts', '.tsx', '.json'],
+    +         alias: {
+    +           tests: ['./tests/'],
+    +           "@components": "./src/components",
+    +         }
+    +       }
+    +    ]
+}
