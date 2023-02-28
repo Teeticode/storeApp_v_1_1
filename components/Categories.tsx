@@ -21,6 +21,7 @@ interface categoryProps{
     categoryReducer:CategoryState,
     getCategory:Function,
     active?: any,
+<<<<<<< HEAD
     setActive?: Function,
     getActiveCat?: Function
 }
@@ -34,6 +35,13 @@ const _Categories: React.FC<categoryProps> = (props)=>{
     setActive,
     getActiveCat
   } = props
+=======
+    setActive?: Function
+}
+
+const _Categories: React.FC<categoryProps> = (props)=>{
+  const {categoryReducer, getCategory, active, setActive} = props
+>>>>>>> 0812b6a551f835b31c3c75c9176ca92dc09e8c5e
   const [categories, setCat] = useState({})
 
   useEffect(()=>{
@@ -58,6 +66,7 @@ const _Categories: React.FC<categoryProps> = (props)=>{
               flexDirection:'column',
               justifyContent:'center'
             }}
+<<<<<<< HEAD
           
             onPress={()=>{
               setActive(item.name)
@@ -68,6 +77,11 @@ const _Categories: React.FC<categoryProps> = (props)=>{
              
             >
 
+=======
+            onPress={()=>{setActive(item.name)}}
+          >
+            <View>
+>>>>>>> 0812b6a551f835b31c3c75c9176ca92dc09e8c5e
             <Image style={{width:'100%', height:'100%'}} source={
               item?.name === 'all'?all:'' ||
               item?.name === 'clothes'?clothes:'' ||

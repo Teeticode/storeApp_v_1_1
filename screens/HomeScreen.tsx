@@ -25,7 +25,10 @@ import {useFonts} from 'expo-font'
 import { useNavigation } from '../utils'
 import moment from 'moment'
 import { act } from 'react-test-renderer'
+<<<<<<< HEAD
 import { RefreshControl } from 'react-native-gesture-handler'
+=======
+>>>>>>> 0812b6a551f835b31c3c75c9176ca92dc09e8c5e
 const Avatar = require('../assets/images/avatar.jpg') 
 interface productProps{
   productsReducer:ProductState,
@@ -41,6 +44,7 @@ const _HomeScreen: React.FC<productProps> = (props)=>{
   const {productsReducer,getProducts} = props
   const {navigate} = useNavigation()
   const {width,height} = Dimensions.get('window')
+<<<<<<< HEAD
   const [prodCat, setProdCat] = useState(productsReducer?.availability)
   const [products,setProds] = useState(productsReducer.availability)
   const [err, setErr] = useState('')
@@ -84,6 +88,42 @@ const _HomeScreen: React.FC<productProps> = (props)=>{
     getData()
     
   }
+=======
+  const [prodCat, setProdCat] = useState(productsReducer.availability)
+  const [products,setProds] = useState(productsReducer.availability)
+  const [err, setErr] = useState('')
+  const [arr,setArr] = useState([])
+  const [active, setActive] = useState('all')
+    const [activeCat,setActivecat] = useState('Products')
+  useEffect(()=>{
+    getProducts()
+    if(productsReducer){
+      setProds(productsReducer?.availability)
+      setProdCat(productsReducer?.availability)
+      console.log(products)
+    }
+  },[])
+  useEffect(()=>{
+    getProducts()
+    if(productsReducer.availability.length > 1){
+      prodCat?.filter(prod=>{
+        if(active === prod?.category?.name){
+          setProds([prod])
+        }else if (active === 'all'){
+          setProds(productsReducer?.availability)
+        }
+      })
+    }else{
+      setProds(productsReducer?.availability)
+    }
+      
+    
+    
+    
+    
+    
+  },[active])
+>>>>>>> 0812b6a551f835b31c3c75c9176ca92dc09e8c5e
   
   return(
     <SafeAreaView style={styles.container}>
@@ -173,7 +213,11 @@ const _HomeScreen: React.FC<productProps> = (props)=>{
                 {
                   activeCat === 'Products' ? 
                   (
+<<<<<<< HEAD
                     <Categories active={active} setActive={setActive} getActiveCat={getActiveCat}/>
+=======
+                    <Categories active={active} setActive={setActive}/>
+>>>>>>> 0812b6a551f835b31c3c75c9176ca92dc09e8c5e
                   ):(
                   <>
                   </>
@@ -192,7 +236,11 @@ const _HomeScreen: React.FC<productProps> = (props)=>{
                       marginBottom:40
                     }}
                   >
+<<<<<<< HEAD
                     {refreshing?(<ActivityIndicator size={20} color='#036ea8'/>):null}
+=======
+                    
+>>>>>>> 0812b6a551f835b31c3c75c9176ca92dc09e8c5e
                     <FlatList
                       data={products}
                       style={{
@@ -201,12 +249,15 @@ const _HomeScreen: React.FC<productProps> = (props)=>{
                       numColumns={2}
                       ListFooterComponentStyle={{marginBottom:'10%'}}
                       keyExtractor={(item)=> item.id}
+<<<<<<< HEAD
                       refreshControl={
                         <RefreshControl
                           refreshing={refreshing}
                           onRefresh={onRefresh}
                         />
                       }
+=======
+>>>>>>> 0812b6a551f835b31c3c75c9176ca92dc09e8c5e
                       showsHorizontalScrollIndicator={false}
                       showsVerticalScrollIndicator={false}
                       renderItem={({item})=>(
